@@ -7,3 +7,14 @@ canvas.width = 1024;
 canvas.height = 576;
 
 c.fillRect(0, 0, canvas.width, canvas.height);
+
+class Sprite {
+    constructor(position){
+        this.position = position;
+    }
+
+    draw() {
+        c.fillStyle = "red";
+        c.fillRect(this.position.x, this.position.y, 50, 150);
+    }
+}
