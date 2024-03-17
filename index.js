@@ -1,5 +1,7 @@
 "use strict"
 
+import Sprite from "./sprite.js"
+
 const canvas = document.querySelector("canvas");
 const c = canvas.getContext("2d");
 
@@ -8,13 +10,6 @@ canvas.height = 576;
 
 c.fillRect(0, 0, canvas.width, canvas.height);
 
-class Sprite {
-    constructor(position){
-        this.position = position;
-    }
+const player1 = new Sprite(c, {x: 10, y: 10});
+player1.draw();
 
-    draw() {
-        c.fillStyle = "red";
-        c.fillRect(this.position.x, this.position.y, 50, 150);
-    }
-}
