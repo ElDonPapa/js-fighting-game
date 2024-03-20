@@ -7,7 +7,9 @@ export default class Sprite {
         this.height = 130;
         this.width = 50;
         this.moveSpeed = 4;
+        this.jumpHeight = 15;
         this.lastKey;
+        this.canJump = false;
         this.position = position;
         this.velocity = {
             x: 0,
@@ -34,7 +36,8 @@ export default class Sprite {
         if((this.height + this.position.y + this.velocity.y) < Settings.canvasHeight){
             this.velocity.y += Settings.gravity;
         } else {
-            this.velocity.y /= 2; 
+            this.velocity.y = 0; 
+            this.canJump = true;
         }
     }
 

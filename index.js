@@ -90,6 +90,7 @@ window.requestAnimationFrame(update);
 // Handle player movements
 window.addEventListener("keydown", (event) => {
     switch(event.key) {
+        // Player 1
         case "d":
             keys.d.pressed = true; 
             player1.lastKey = "d";
@@ -98,6 +99,14 @@ window.addEventListener("keydown", (event) => {
             keys.q.pressed = true;
             player1.lastKey = "q";
             break;
+        case "z":
+            if(player1.canJump){
+                player1.canJump = false;
+                player1.velocity.y = -player1.jumpHeight;
+            }
+            break;
+    
+        // Player 2
         case "ArrowRight":
             keys.arrowRight.pressed = true;
             player2.lastKey = "ArrowRight";
@@ -106,17 +115,26 @@ window.addEventListener("keydown", (event) => {
             keys.arrowLeft.pressed = true;
             player2.lastKey = "ArrowLeft";
             break
+        case "ArrowUp":
+            if(player2.canJump){
+                player2.canJump = false;
+                player2.velocity.y = -player2.jumpHeight;
+            }
+            break;
     }
 })
 
 window.addEventListener("keyup", (event) => {
     switch(event.key) {
+        // Player 1
         case "d":
             keys.d.pressed = false;
             break;
         case "q":
             keys.q.pressed = false;
             break
+
+        // Player 2
         case "ArrowRight":
             keys.arrowRight.pressed = false;
             break
