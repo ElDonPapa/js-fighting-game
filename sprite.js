@@ -4,8 +4,9 @@ export default class Sprite {
     constructor(c){
         this.c = c;
         this.height = 130;
+        this.moveSpeed = 3;
         this.position = {
-            x: 0,
+            x: Settings.canvasWidth / 2,
             y: 0
         };
         this.velocity = {
@@ -30,6 +31,7 @@ export default class Sprite {
     update() {
         this.draw();
         this.position.y += this.velocity.y;
+        this.position.x += this.velocity.x;
         this.updateGravity();
     }
 }
