@@ -1,10 +1,11 @@
 import Settings from "./settings.js"
 
 export default class Sprite {
-    constructor(c, position){
-        this.c = c;
+    constructor({context, position, color = "red"}){
+        this.c = context;
+        this.color = color;
         this.height = 130;
-        this.moveSpeed = 3;
+        this.moveSpeed = 4;
         this.lastKey;
         this.position = position;
         this.velocity = {
@@ -14,7 +15,7 @@ export default class Sprite {
     }
 
     draw() {
-        this.c.fillStyle = "red";
+        this.c.fillStyle = this.color;
         this.c.fillRect(this.position.x, this.position.y, 50, this.height);
     }
 

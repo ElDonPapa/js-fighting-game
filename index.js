@@ -10,8 +10,22 @@ canvas.width = Settings.canvasWidth;
 canvas.height = Settings.canvasHeight;
 c.fillRect(0, 0, Settings.canvasWidth, Settings.canvasHeight);
 
-const player1 = new Sprite(c, {x: Settings.canvasWidth/3, y: 0});
-const player2 = new Sprite(c, {x: Settings.canvasWidth - Settings.canvasWidth/3, y:0});
+const player1 = new Sprite({
+    context: c,
+    position: {
+        x: Settings.canvasWidth/3,
+        y: 0
+    }
+});
+
+const player2 = new Sprite({
+    context: c,
+    position: {
+        x: Settings.canvasWidth - Settings.canvasWidth/3,
+        y: 0
+    },
+    color: "blue"
+});
 
 let lastKey;
 const keys = {
