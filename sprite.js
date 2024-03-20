@@ -10,6 +10,7 @@ export default class Sprite {
         this.jumpHeight = 15;
         this.lastKey;
         this.canJump = false;
+        this.isAttacking = false;
         this.position = position;
         this.velocity = {
             x: 0,
@@ -27,9 +28,18 @@ export default class Sprite {
         this.c.fillRect(this.position.x, this.position.y, this.width, this.height);
 
         // Attack box
-        this.c.fillStyle = "green";
-        this.c.fillRect(this.attackBox.position.x, this.attackBox.position.y,
-                        this.attackBox.width, this.attackBox.height);
+        if(this.isAttacking) {
+            this.c.fillStyle = "green";
+            this.c.fillRect(this.attackBox.position.x, this.attackBox.position.y,
+                            this.attackBox.width, this.attackBox.height);
+        }
+    }
+
+    attack() {
+        this.isAttacking = true;
+        setTimeout(() => {
+            this.isAttacking = false;
+        }, 100);
     }
 
     updateGravity() {

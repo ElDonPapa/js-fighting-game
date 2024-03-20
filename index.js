@@ -76,7 +76,11 @@ function update(time)
         if(
             player1.attackBox.position.x + player1.attackBox.width > player2.position.x
             && player1.attackBox.position.x < player2.position.x + player2.width
+            && player1.attackBox.position.y + player1.attackBox.height > player2.position.y
+            && player1.attackBox.position.y < player2.position.y + player2.height
+            && player1.isAttacking
         ) {
+            player1.isAttacking = false;
             console.log("ATTACK");
         }
     }
@@ -105,7 +109,10 @@ window.addEventListener("keydown", (event) => {
                 player1.velocity.y = -player1.jumpHeight;
             }
             break;
-    
+        case "s":
+            player1.attack()
+            break; 
+
         // Player 2
         case "ArrowRight":
             keys.arrowRight.pressed = true;
