@@ -23,7 +23,7 @@ export default class Sprite {
         if((this.height + this.position.y + this.velocity.y) < Settings.canvasHeight){
             this.velocity.y += Settings.gravity;
         } else {
-            this.velocity.y = 0;
+            this.velocity.y /= 2; 
         }
     }
 
