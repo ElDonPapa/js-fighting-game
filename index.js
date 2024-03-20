@@ -10,7 +10,8 @@ canvas.width = Settings.canvasWidth;
 canvas.height = Settings.canvasHeight;
 c.fillRect(0, 0, Settings.canvasWidth, Settings.canvasHeight);
 
-const player1 = new Sprite(c);
+const player1 = new Sprite(c, {x: Settings.canvasWidth/3, y: 0});
+const player2 = new Sprite(c, {x: Settings.canvasWidth - Settings.canvasWidth/3, y:0});
 
 let lastKey;
 const keys = {
@@ -19,7 +20,13 @@ const keys = {
     },
     d: {
         pressed: false
-    }
+    },
+    arrowLeft: {
+        pressed: false
+    },
+    arrowRight: {
+        pressed: false
+    },
 };
 
 // Main game loop
@@ -33,13 +40,22 @@ function update(time)
         c.fillStyle = "black";
         c.fillRect(0, 0, Settings.canvasWidth, Settings.canvasHeight);
         player1.update();
+        player2.update();
         
         // Player 1 movements
         player1.velocity.x = 0;
-        if(keys.d.pressed && lastKey === "d"){
+        if(keys.d.pressed && player1.lastKey === "d"){
             player1.velocity.x = player1.moveSpeed;
-        } else if(keys.q.pressed && lastKey === "q") {
+        } else if(keys.q.pressed && player1.lastKey === "q") {
             player1.velocity.x = -player1.moveSpeed;
+        }
+
+        // Player 2 movements
+        player2.velocity.x = 0;
+        if(keys.arrowRight.pressed && player2.lastKey === "ArrowRight"){
+            player2.velocity.x = player2.moveSpeed;
+        } else if(keys.arrowLeft.pressed && player2.lastKey === "ArrowLeft") {
+            player2.velocity.x = -player2.moveSpeed;
         }
     }
 
@@ -54,12 +70,20 @@ window.addEventListener("keydown", (event) => {
     switch(event.key) {
         case "d":
             keys.d.pressed = true; 
-            lastKey = "d";
+            player1.lastKey = "d";
             break;
         case "q": 
             keys.q.pressed = true;
-            lastKey = "q";
+            player1.lastKey = "q";
             break;
+        case "ArrowRight":
+            keys.arrowRight.pressed = true;
+            player2.lastKey = "ArrowRight";
+            break
+        case "ArrowLeft":
+            keys.arrowLeft.pressed = true;
+            player2.lastKey = "ArrowLeft";
+            break
     }
 })
 
@@ -70,6 +94,12 @@ window.addEventListener("keyup", (event) => {
             break;
         case "q":
             keys.q.pressed = false;
+            break
+        case "ArrowRight":
+            keys.arrowRight.pressed = false;
+            break
+        case "ArrowLeft":
+            keys.arrowLeft.pressed = false;
             break
     }
 })

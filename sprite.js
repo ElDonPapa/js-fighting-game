@@ -1,14 +1,12 @@
 import Settings from "./settings.js"
 
 export default class Sprite {
-    constructor(c){
+    constructor(c, position){
         this.c = c;
         this.height = 130;
         this.moveSpeed = 3;
-        this.position = {
-            x: Settings.canvasWidth / 2,
-            y: 0
-        };
+        this.lastKey;
+        this.position = position;
         this.velocity = {
             x: 0,
             y: 0
