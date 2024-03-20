@@ -10,8 +10,7 @@ canvas.height = 576;
 
 c.fillRect(0, 0, canvas.width, canvas.height);
 
-const player1 = new Sprite(c, {x: 10, y: 10});
-player1.draw();
+const player1 = new Sprite(c);
 
 // Main game loop
 let lastTime;
@@ -21,6 +20,9 @@ function update(time)
     {
         const delta = time - lastTime;
         // Put game updates here
+        c.fillStyle = "black";
+        c.fillRect(0, 0, canvas.width, canvas.height);
+        player1.update();
     }
 
     lastTime = time;

@@ -1,12 +1,20 @@
 export default class Sprite {
-    constructor(c, position){
+    constructor(c){
         this.c = c;
-        this.position = position;
+        this.position = {
+            x: 0,
+            y: 0
+        };
     }
 
     draw() {
         this.c.fillStyle = "red";
-        this.c.fillRect(this.position.x, this.position.y, 50, 150);
+        this.c.fillRect(this.position.x, this.position.y, 50, 130);
+    }
+
+    update() {
+        this.draw();
+        this.position.y++;
     }
 }
 
