@@ -71,6 +71,14 @@ function update(time)
         } else if(keys.arrowLeft.pressed && player2.lastKey === "ArrowLeft") {
             player2.velocity.x = -player2.moveSpeed;
         }
+        
+        // Attack box collisions check
+        if(
+            player1.attackBox.position.x + player1.attackBox.width > player2.position.x
+            && player1.attackBox.position.x < player2.position.x + player2.width
+        ) {
+            console.log("ATTACK");
+        }
     }
 
     lastTime = time;

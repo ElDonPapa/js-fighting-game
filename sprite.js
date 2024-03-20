@@ -5,6 +5,7 @@ export default class Sprite {
         this.c = context;
         this.color = color;
         this.height = 130;
+        this.width = 50;
         this.moveSpeed = 4;
         this.lastKey;
         this.position = position;
@@ -12,11 +13,21 @@ export default class Sprite {
             x: 0,
             y: 0
         }
+        this.attackBox = {
+            position: this.position,
+            width: 100,
+            height: 50
+        }
     }
 
     draw() {
         this.c.fillStyle = this.color;
-        this.c.fillRect(this.position.x, this.position.y, 50, this.height);
+        this.c.fillRect(this.position.x, this.position.y, this.width, this.height);
+
+        // Attack box
+        this.c.fillStyle = "green";
+        this.c.fillRect(this.attackBox.position.x, this.attackBox.position.y,
+                        this.attackBox.width, this.attackBox.height);
     }
 
     updateGravity() {
