@@ -43,6 +43,15 @@ const keys = {
     },
 };
 
+function rectangularCollision({rectangle1, rectangle2}){
+    return (
+        rectangle1.attackBox.position.x + rectangle1.attackBox.width > rectangle2.position.x
+        && rectangle1.attackBox.position.x < rectangle2.position.x + rectangle2.width
+        && rectangle1.attackBox.position.y + rectangle1.attackBox.height > rectangle2.position.y
+        && rectangle1.attackBox.position.y < rectangle2.position.y + rectangle2.height
+    );
+}
+
 // Main game loop
 let lastTime;
 function update(time)
@@ -74,24 +83,20 @@ function update(time)
         
         // Player 1 Attack box collisions check
         if(
-            player1.attackBox.position.x + player1.attackBox.width > player2.position.x
-            && player1.attackBox.position.x < player2.position.x + player2.width
-            && player1.attackBox.position.y + player1.attackBox.height > player2.position.y
-            && player1.attackBox.position.y < player2.position.y + player2.height
-            && player1.isAttacking
-        ) {
+            rectangularCollision({
+                rectangle1: player1,
+                rectangle2: player2 
+            }) && player1.isAttacking) {
             player1.isAttacking = false;
             console.log("ATTACK FROM P1");
         }
 
         // Player 1 Attack box collisions check
         if(
-            player2.attackBox.position.x + player2.attackBox.width > player1.position.x
-            && player2.attackBox.position.x < player1.position.x + player1.width
-            && player2.attackBox.position.y + player2.attackBox.height > player1.position.y
-            && player2.attackBox.position.y < player1.position.y + player1.height
-            && player2.isAttacking
-        ) {
+            rectangularCollision({
+                rectangle1: player2,
+                rectangle2: player1 
+            }) && player2.isAttacking) {
             player2.isAttacking = false;
             console.log("ATTACK FROM P2");
         }
