@@ -55,8 +55,20 @@ function rectangularCollision({rectangle1, rectangle2}){
     );
 }
 
-const timer = document.querySelector("#timer");
 const winMessage = document.querySelector("#winMessage");
+
+function determineWinner(player1, player2) {
+    if(player1.health === player2.health) {
+        winMessage.innerHTML = "Tie";
+    } else if(player1.health > player2.health) {
+        winMessage.innerHTML = "Player 1 Wins";
+    } else {
+        winMessage.innerHTML = "Player 2 Wins";
+    }
+    winMessage.style.visibility = "visible";
+}
+
+const timer = document.querySelector("#timer");
 let timerTime = 10;
 
 function decreaseTimer() {
@@ -65,14 +77,7 @@ function decreaseTimer() {
         timer.innerHTML = timerTime;
         setTimeout(decreaseTimer, 1000);
     } else {
-        if(player1.health === player2.health) {
-            winMessage.innerHTML = "Tie";
-        } else if(player1.health > player2.health) {
-            winMessage.innerHTML = "Player 1 Wins";
-        } else {
-            winMessage.innerHTML = "Player 2 Wins";
-        }
-        winMessage.style.visibility = "visible";
+        determineWinner(player1, player2);
     } 
 
 }
@@ -134,6 +139,11 @@ function update(time)
 
         player1.facingEast = (player1XCenter < player2XCenter);
         player2.facingEast = (player2XCenter < player1XCenter);
+
+        // End game on death
+        if(player1.health <= 0 || player2.health <= 0){
+            determineWinner(player1, player2);
+        }
 
     }
 
