@@ -141,7 +141,8 @@ function update(time)
         player2.facingEast = (player2XCenter < player1XCenter);
 
         // End game on death
-        if(player1.health <= 0 || player2.health <= 0){
+        if((player1.health <= 0 || player2.health <= 0) 
+        && winMessage.style.visibility !== "visible") {
             determineWinner(player1, player2, timerId);
         }
 
