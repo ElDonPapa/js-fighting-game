@@ -56,14 +56,25 @@ function rectangularCollision({rectangle1, rectangle2}){
 }
 
 const timer = document.querySelector("#timer");
+const winMessage = document.querySelector("#winMessage");
 let timerTime = 10;
 
 function decreaseTimer() {
     if(timerTime > 0) {
         timerTime --;
         timer.innerHTML = timerTime;
-    }
-    setTimeout(decreaseTimer, 1000);
+        setTimeout(decreaseTimer, 1000);
+    } else {
+        if(player1.health === player2.health) {
+            winMessage.innerHTML = "Tie";
+        } else if(player1.health > player2.health) {
+            winMessage.innerHTML = "Player 1 Wins";
+        } else {
+            winMessage.innerHTML = "Player 2 Wins";
+        }
+        winMessage.style.visibility = "visible";
+    } 
+
 }
 
 // Main game loop
