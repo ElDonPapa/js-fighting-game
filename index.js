@@ -1,6 +1,7 @@
 "use strict"
 
 import Fighter from "./js/fighter.js"
+import Sprite from "./js/sprite.js"
 import Settings from "./js/settings.js"
 
 const canvas = document.querySelector("canvas");
@@ -9,6 +10,15 @@ const c = canvas.getContext("2d");
 canvas.width = Settings.canvasWidth;
 canvas.height = Settings.canvasHeight;
 c.fillRect(0, 0, Settings.canvasWidth, Settings.canvasHeight);
+
+const background = new Sprite({
+    context: c,
+    position: {
+        x: 0,
+        y: 0
+    },
+    imgSrc: "./img/background.png"
+});
 
 const player1 = new Fighter({
     context: c,
@@ -90,8 +100,7 @@ function update(time)
     {
         const delta = time - lastTime;
         // Put game updates here
-        c.fillStyle = "black";
-        c.fillRect(0, 0, Settings.canvasWidth, Settings.canvasHeight);
+        background.update();
         player1.update();
         player2.update();
         
