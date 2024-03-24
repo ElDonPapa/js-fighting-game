@@ -1,7 +1,7 @@
 "use strict"
 
-import Sprite from "./sprite.js"
-import Settings from "./settings.js"
+import Fighter from "./js/fighter.js"
+import Settings from "./js/settings.js"
 
 const canvas = document.querySelector("canvas");
 const c = canvas.getContext("2d");
@@ -10,7 +10,7 @@ canvas.width = Settings.canvasWidth;
 canvas.height = Settings.canvasHeight;
 c.fillRect(0, 0, Settings.canvasWidth, Settings.canvasHeight);
 
-const player1 = new Sprite({
+const player1 = new Fighter({
     context: c,
     position: {
         x: Settings.canvasWidth/3,
@@ -18,7 +18,7 @@ const player1 = new Sprite({
     }
 });
 
-const player2 = new Sprite({
+const player2 = new Fighter({
     context: c,
     position: {
         x: Settings.canvasWidth - Settings.canvasWidth/3,
