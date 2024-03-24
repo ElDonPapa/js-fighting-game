@@ -3,9 +3,17 @@
     <head>
         <title>JS Fighting Game</title>
         <meta charset="UTF-8">
+        <link href="style.css" rel="stylesheet">
+        <script type="module" src="index.js" defer></script>
     </head>
     <body>
-        <canvas></canvas>
-        <script type="module" src="index.js"></script>
+        <div class="screen">
+            <div class="top-bar">
+                <div class="player health-bar"></div>
+                <div class="timer"></div>
+                <div class="enemy health-bar"></div>
+            </div>
+            <canvas></canvas>
+        </div>
     </body>
 </html>
