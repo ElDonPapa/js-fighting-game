@@ -91,7 +91,7 @@ function update(time)
             console.log("ATTACK FROM P1");
         }
 
-        // Player 1 Attack box collisions check
+        // Player 2 Attack box collisions check
         if(
             rectangularCollision({
                 rectangle1: player2,
@@ -100,6 +100,14 @@ function update(time)
             player2.isAttacking = false;
             console.log("ATTACK FROM P2");
         }
+
+        // Players Orientation update
+        const player1XCenter = player1.position.x + player1.width / 2;
+        const player2XCenter = player2.position.x + player2.width / 2;
+
+        player1.facingEast = (player1XCenter < player2XCenter);
+        player2.facingEast = (player2XCenter < player1XCenter);
+
     }
 
     lastTime = time;

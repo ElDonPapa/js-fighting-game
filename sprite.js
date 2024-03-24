@@ -8,6 +8,7 @@ export default class Sprite {
         this.width = 50;
         this.moveSpeed = 4;
         this.jumpHeight = 15;
+        this.facingEast = true;
         this.lastKey;
         this.canJump = false;
         this.isAttacking = false;
@@ -18,6 +19,10 @@ export default class Sprite {
         }
         this.attackBox = {
             position: this.position,
+            offset: {
+                x: 0,
+                y: 0
+            },
             width: 100,
             height: 50
         }
@@ -30,8 +35,12 @@ export default class Sprite {
         // Attack box
         if(this.isAttacking) {
             this.c.fillStyle = "green";
-            this.c.fillRect(this.attackBox.position.x, this.attackBox.position.y,
-                            this.attackBox.width, this.attackBox.height);
+            this.c.fillRect(
+                this.attackBox.position.x - this.attackBox.offset.x,
+                this.attackBox.position.y,
+                this.attackBox.width,
+                this.attackBox.height
+            );
         }
     }
 
@@ -51,10 +60,19 @@ export default class Sprite {
         }
     }
 
+    updateOrientation() {
+        if(this.facingEast) {
+            this.attackBox.offset.x = 0;
+        } else {
+            this.attackBox.offset.x = this.width;
+        }
+    }
+
     update() {
         this.draw();
         this.position.y += this.velocity.y;
         this.position.x += this.velocity.x;
+        this.updateOrientation();
         this.updateGravity();
     }
 }
