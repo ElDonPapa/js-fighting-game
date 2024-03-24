@@ -55,6 +55,17 @@ function rectangularCollision({rectangle1, rectangle2}){
     );
 }
 
+const timer = document.querySelector("#timer");
+let timerTime = 10;
+
+function decreaseTimer() {
+    if(timerTime > 0) {
+        timerTime --;
+        timer.innerHTML = timerTime;
+    }
+    setTimeout(decreaseTimer, 1000);
+}
+
 // Main game loop
 let lastTime;
 function update(time)
@@ -119,6 +130,7 @@ function update(time)
     window.requestAnimationFrame(update);
 }
 
+decreaseTimer();
 window.requestAnimationFrame(update);
 
 // Handle player movements
