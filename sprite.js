@@ -18,7 +18,10 @@ export default class Sprite {
             y: 0
         }
         this.attackBox = {
-            position: this.position,
+            position: {
+                x: this.position.x,
+                y: this.position.y
+            },
             offset: {
                 x: 0,
                 y: 0
@@ -36,7 +39,7 @@ export default class Sprite {
         if(this.isAttacking) {
             this.c.fillStyle = "green";
             this.c.fillRect(
-                this.attackBox.position.x - this.attackBox.offset.x,
+                this.attackBox.position.x,
                 this.attackBox.position.y,
                 this.attackBox.width,
                 this.attackBox.height
@@ -61,17 +64,15 @@ export default class Sprite {
     }
 
     updateOrientation() {
-        if(this.facingEast) {
-            this.attackBox.offset.x = 0;
-        } else {
-            this.attackBox.offset.x = this.width;
-        }
+        this.attackBox.offset.x = (this.facingEast) ? 0 : this.width;
     }
 
     update() {
         this.draw();
         this.position.y += this.velocity.y;
         this.position.x += this.velocity.x;
+        this.attackBox.position.x = this.position.x - this.attackBox.offset.x;
+        this.attackBox.position.y = this.position.y;
         this.updateOrientation();
         this.updateGravity();
     }
