@@ -8,6 +8,9 @@ export default class Sprite {
         this.width = 50;
         this.moveSpeed = 4;
         this.jumpHeight = 15;
+        this.baseHealth = 100;
+        this.health = this.baseHealth;
+        this.attackDamage = 10;
         this.facingEast = true;
         this.lastKey;
         this.canJump = false;

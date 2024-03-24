@@ -27,6 +27,9 @@ const player2 = new Sprite({
     color: "blue"
 });
 
+const player1HealthBar = document.querySelector("#player1HealthBar");
+const player2HealthBar = document.querySelector("#player2HealthBar");
+
 let lastKey;
 const keys = {
     q: {
@@ -88,7 +91,8 @@ function update(time)
                 rectangle2: player2 
             }) && player1.isAttacking) {
             player1.isAttacking = false;
-            console.log("ATTACK FROM P1");
+            player2.health -= player1.attackDamage;
+            player2HealthBar.style.width = (player2.health / player2.baseHealth) * 100 + "%";
         }
 
         // Player 2 Attack box collisions check
@@ -98,7 +102,8 @@ function update(time)
                 rectangle2: player1 
             }) && player2.isAttacking) {
             player2.isAttacking = false;
-            console.log("ATTACK FROM P2");
+            player1.health -= player2.attackDamage;
+            player1HealthBar.style.width = (player1.health / player1.baseHealth) * 100 + "%";
         }
 
         // Players Orientation update
