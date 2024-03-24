@@ -55,9 +55,23 @@ function rectangularCollision({rectangle1, rectangle2}){
     );
 }
 
-const winMessage = document.querySelector("#winMessage");
 
+const timer = document.querySelector("#timer");
+let timerTime = 10;
+let timerId;
+function decreaseTimer() {
+    if(timerTime > 0) {
+        timerTime --;
+        timer.innerHTML = timerTime;
+        timerId = setTimeout(decreaseTimer, 1000);
+    } else {
+        determineWinner(player1, player2);
+    } 
+}
+
+const winMessage = document.querySelector("#winMessage");
 function determineWinner(player1, player2) {
+    clearTimeout(timerId);
     if(player1.health === player2.health) {
         winMessage.innerHTML = "Tie";
     } else if(player1.health > player2.health) {
@@ -66,20 +80,6 @@ function determineWinner(player1, player2) {
         winMessage.innerHTML = "Player 2 Wins";
     }
     winMessage.style.visibility = "visible";
-}
-
-const timer = document.querySelector("#timer");
-let timerTime = 10;
-
-function decreaseTimer() {
-    if(timerTime > 0) {
-        timerTime --;
-        timer.innerHTML = timerTime;
-        setTimeout(decreaseTimer, 1000);
-    } else {
-        determineWinner(player1, player2);
-    } 
-
 }
 
 // Main game loop
@@ -142,7 +142,7 @@ function update(time)
 
         // End game on death
         if(player1.health <= 0 || player2.health <= 0){
-            determineWinner(player1, player2);
+            determineWinner(player1, player2, timerId);
         }
 
     }
